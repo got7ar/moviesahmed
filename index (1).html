@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>جديد الأفلام</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f5f1;--card:#fff;--text:#1c1b18;--muted:#6b6860;--accent:#c2410c;--line:#e4e1d8;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141413;--card:#1f1e1c;--text:#f0eee6;--muted:#a09d92;--accent:#fb923c;--line:#33312d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141413;--card:#1f1e1c;--text:#f0eee6;--muted:#a09d92;--accent:#fb923c;--line:#33312d;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI",Tahoma,"Noto Naskh Arabic",system-ui,sans-serif;line-height:1.6}
+header{padding:28px 16px 8px;max-width:960px;margin:auto}
+h1{margin:0;font-size:1.9rem}
+h1 span{color:var(--accent)}
+p.sub{color:var(--muted);margin:4px 0 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;max-width:960px;margin:16px auto;padding:0 16px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 16px;border-radius:999px;font:inherit;cursor:pointer}
+.tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+main{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;max-width:960px;margin:auto;padding:0 16px 24px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.p{height:110px;border-radius:10px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:700;color:#fff;direction:ltr;background:linear-gradient(135deg,var(--accent),#7c2d12)}
+.p.img{height:auto;aspect-ratio:2/3;background:none}.p img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.c h3{margin:0 0 6px;font-size:1.05rem;direction:ltr;text-align:right}
+.d{color:var(--accent);font-weight:600;font-size:.88rem}
+.g{color:var(--muted);font-size:.85rem;margin-top:2px}
+.s{font-size:.9rem;margin-top:8px}
+.c a{display:inline-block;margin-top:10px;color:var(--accent);font-size:.85rem;text-decoration:none;border-bottom:1px solid var(--accent)}
+.ic{display:flex;gap:12px;align-items:center;margin-top:12px}.ic a{margin:0;border:0;display:inline-flex}
+footer{max-width:960px;margin:auto;padding:8px 16px 32px;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+<h1>🎬 جديد <span>الأفلام</span></h1>
+<p class="sub">أحدث الأفلام المتاحة رقمياً — أكتوبر 2026</p>
+</header>
+<div class="tabs" id="tabs"></div>
+<main id="list"></main>
+<footer>القائمة مأخوذة من MDBList (قائمة Trending + New + Classic Movies)، والتواريخ هي تواريخ الإتاحة الرقمية. الملخصات مكتوبة بصياغتنا. أيقونة يوتيوب تفتح نتائج البحث عن الإعلان الرسمي. البوسترات من TMDb وتتطلب فتح الملف على جهازك.</footer>
+<script>
+var M=[
+["Hallowarrior","2026-10-16","tt29703555","رعب / أكشن","آخر ناجية على الأرض تواجه عصابة غزاة في ليلة الهالوين."],
+["Clean Hands","2026-10-16","tt36271247","دراما / قصة حقيقية","شرطي مكافحة مخدرات تحوّل إلى داعم للتعافي، وابنته المدمنة السابقة."],
+["Therapy Done Right","2026-10-16","tt37027309","كوميديا سوداء","محلل نفسي فقد إيمانه بالعلاج التقليدي يتجاوز كل الحدود لمساعدة روائي متعثر."],
+["Aasha","2026-10-16","tt37894980","دراما","أرملة عنيدة تتورط في مشادة حادة مع رجل بعد حادث سير بسيط."],
+["Masterplan","2026-10-16","tt38672588","كوميديا / سرقة","لص أسطوري يجنّد ولديه اللذين لا يعرفهما لسرقة الموناليزا."],
+["The Disciple","2026-10-16","tt39150035","وثائقي","كيف أصبح معجب من أشد المعجبين جزءاً من عالم فرقة وو-تانغ كلان."],
+["Norm: The Tale of Norm Macdonald","2026-10-16","tt44822485","وثائقي","نظرة على حياة الكوميدي نورم ماكدونالد المليئة بالتناقضات."],
+["Seriously Single Too","2026-10-16","tt45858039","كوميديا رومانسية","صديقتان تواجهان مخاوفهما بعد أن تُفاجأ إحداهما بطلب زواج."],
+["Tenzing","2026-10-15","tt6262770","سيرة / مغامرة","رجل مصمم يخوض مغامرة شبه مستحيلة ليكون من أوائل من يصلون قمة إيفرست."],
+["Enna Vilai","2026-10-15","tt33095205","دراما","صياد بسيط يجد قلادة ذهبية فتتحول حياته إلى كابوس بسبب اتهامات باطلة."],
+["Vampires of the Velvet Lounge","2026-10-14","tt29762861","رعب / فانتازيا","مصاصو دماء يحاولون التأقلم مع العصر الحديث وهم في صراع مع عدو خطير."],
+["Hope","2026-10-13","tt27369017","إثارة / خيال علمي","شرطيان في قرية كورية نائية يحققان في مخلوق غامض يهدد الأهالي."],
+["Practical Magic 2","2026-10-13","tt32588798","فانتازيا","الأختان أوينز تواجهان لعنة مظلمة تهدد عائلتهما."],
+["Runner","2026-10-13","tt31349844","أكشن","جندي سابق يتحول وشريكه إلى هدف لعصابة بعد مهمة توصيل دواء لإنقاذ طفلة."],
+["Buddy","2026-10-13","tt37281055","رعب / كوميديا","حصان وحيد القرن البرتقالي المغني يحتجز طاقم برنامج تلفزيوني في عالم غريب."],
+["Let's Have Kids!","2026-10-13","tt9174288","كوميديا","صديقتان تقرران الحمل معاً، لكن صداقتهما تهتز عندما تحمل واحدة فقط."],
+["Deathgasm 2: Goremageddon","2026-10-13","tt32606305","رعب / كوميديا","فرقة ميتال تُبعث بالسحر الأسود فتعمّ الفوضى في البلدة."],
+["Khadam","2026-10-11","tt38267329","رعب","أم تسابق الزمن لإنقاذ ابنتها من كيان مظلم بدأ يسيطر على حياتها."],
+["Oasis: Don't Look Back in Anger","2026-10-09","tt36150957","وثائقي موسيقي","صعود فرقة أوايسس عبر لقطات نادرة، وصولاً إلى جولة لمّ الشمل."],
+["R.L. Stine's Pumpkinhead 2","2026-10-09","tt40902212","رعب","شابان يحاولان إيقاف لعنة جديدة تهدد بلدة كاملة."],
+["Matchbox the Movie","2026-10-08","tt28498219","مغامرة / كوميديا","أصدقاء طفولة يكتشفون مؤامرة دولية خطيرة ويحاولون إنقاذ العالم."],
+["Animals","2026-10-08","tt31049299","إثارة","زوجان يجب أن يدبّرا فدية خلال ساعات بعد خطف ابنهما."],
+["Love of Your Life","2026-10-07","tt34384900","رومانسي","علاقة حب جارفة تنقلب معها حياة مايا وتبدأ رحلة جديدة."],
+["Spider-Man: Brand New Day","2026-10-06","tt22084616","أبطال خارقون","بيتر باركر يكافح الجريمة في عالم لا يتذكره، ويواجه شريراً لا يراه أحد."],
+["Onslaught","2026-10-06","tt32268691","أكشن","قناصة تحمي ابنتها من جنود معدّلين وراثياً هربوا في الصحراء."],
+["Late Fame","2026-10-06","tt32298494","دراما","موظف بريد يكتب الشعر يُكتشف متأخراً فيدخل دائرة من المعجبين الغامضين."],
+["Insidious: Out of the Further","2026-10-06","tt32393988","رعب","أم تكتشف أنها تستطيع جلب كائنات من عالم «الفيرذر» إلى عالمنا."],
+["Fall 2: Deadpoint","2026-10-06","tt31192372","إثارة","متسلقتان تعلقان على ارتفاع شاهق في جبل بتايلاند."]
+];
+var P={"tt29703555": "eaVuQsTofgodi76nXkYoWtN9afH", "tt36271247": "szIEtkFLOMsPX6AVQSfzalNEEDd", "tt37027309": "2gJiHJYhPXQy4ovDD5ZvSjwYfMZ", "tt37894980": "dZyMVwRhI0Y1ANDRM4sAk7P4hYC", "tt38672588": "5xmXVd7nCK3tAo34XkO58SxUCip", "tt39150035": "2vrQxy3Xrb6AvPtsa7jAU9DKxvu", "tt44822485": "sQw3m4hl1xyoT9zr7shnNCHDKI3", "tt45858039": "hbApG0WSwgtaK7hXTZpwZDstDaR", "tt6262770": "eI0QW02PYqhnmIvLRdn9vrfVVP7", "tt33095205": "NkklX4xp3BlLmlMT0LXehkStJZ", "tt29762861": "4uJcIW0PL4vNZvk0z6kwWdOqLv6", "tt27369017": "bcK5naYzzfY0JBCgrPrsrbV6NO1", "tt32588798": "ogwQOLbCfncjvBhFb5l0OmQH8KC", "tt31349844": "yBKMAIj7clP42UkFejhGDBBoTpb", "tt37281055": "1BdZbNvl1SfrrX8J9X5tQzN6Ivu", "tt9174288": "ciHBHFWAUn9tXNpm5NfDOkcgcMx", "tt32606305": "e4iLDxqe8fcIG42YORNlh3t1ZJb", "tt38267329": "qYgUZPSOjlytVpf6q5tZVZFBop1", "tt36150957": "5XoHhKZ1IROW6f5UlRpADHnTL2l", "tt40902212": "4liM7YBglVRk2UVuKsN7YQDmMpr", "tt28498219": "lFKA4GMz36dImEy3DQPdPF7G4V9", "tt31049299": "iISM36voS1E8gX9BM0DVK0kgi3E", "tt34384900": "dL3Tcv4FU2K85bgnGRBgLjFSrLr", "tt22084616": "bjiS5ipwxb9JFy3XRRN4OAilSeX", "tt32268691": "cOGtvhc6Ij9KvzM6jZsfQyg0B0O", "tt32298494": "bcyXE0p4XmZUlcxvTDbvdG9lgsN", "tt32393988": "4tTrW9dXCByS5wt2pXVWb58zNjz", "tt31192372": "fgSm5ylwiXbIHn8UbUXDjk9RRu4"};
+var T=["الكل","11–17 أكتوبر","4–10 أكتوبر","1–3 أكتوبر"],cur=0;
+function grp(d){var n=+d.slice(8);return n>=11?1:n>=4?2:3}
+function render(){
+var t=document.getElementById("tabs"),l=document.getElementById("list");t.innerHTML="";l.innerHTML="";
+T.forEach(function(x,i){var b=document.createElement("button");b.textContent=x;if(i===cur)b.className="on";b.onclick=function(){cur=i;render()};t.appendChild(b)});
+M.filter(function(m){return cur===0||grp(m[1])===cur}).forEach(function(m){
+var c=document.createElement("div");c.className="c";
+c.innerHTML='<div class="p"></div><h3></h3><div class="d"></div><div class="g"></div><div class="s"></div><div class="ic"><a target="_blank" rel="noopener" title="الإعلان على يوتيوب"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><rect x="1" y="4.5" width="22" height="15" rx="4.5" fill="#f00"/><path d="M10 9l5.5 3-5.5 3z" fill="#fff"/></svg></a><a target="_blank" rel="noopener" title="الصفحة على IMDb"><svg viewBox="0 0 48 24" width="44" height="22" aria-hidden="true"><rect width="48" height="24" rx="4" fill="#f5c518"/><text x="24" y="17" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="14" fill="#000">IMDb</text></svg></a></div>';
+var k=c.children;
+k[0].textContent=m[0].replace(/^(The|R\.L\. )/,"").trim().charAt(0).toUpperCase();
+if(P[m[2]]){var im=new Image();im.alt=m[0];im.onload=function(){k[0].textContent="";k[0].className="p img";k[0].appendChild(im)};im.src="https://image.tmdb.org/t/p/w342/"+P[m[2]]+".jpg"}
+k[1].textContent=m[0];
+k[2].textContent="إتاحة رقمية: "+(+m[1].slice(8))+" أكتوبر";
+k[3].textContent=m[3];k[4].textContent=m[4];
+var a=k[5].children;a[0].href="https://www.youtube.com/results?search_query="+encodeURIComponent(m[0]+" official trailer");a[1].href="https://www.imdb.com/title/"+m[2]+"/";
+l.appendChild(c)})}
+render();
+</script>
+</body>
+</html>
